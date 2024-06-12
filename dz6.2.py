@@ -3,24 +3,11 @@ if input_seconds < 0 or input_seconds >= 8640000:
     print("Invalid value. Please enter a number greater than or equal to 0 and less than 8640000.")
 
 else:
-    seconds_in_day = 24 * 60 * 60
-    seconds_in_hour = 60 * 60
-    seconds_in_minute = 60
-    days = input_seconds // seconds_in_day
-    remaining_seconds = input_seconds % seconds_in_day
-    hours = remaining_seconds // seconds_in_hour
-    remaining_seconds = remaining_seconds % seconds_in_hour
-    minutes = remaining_seconds // seconds_in_minute
-    seconds = remaining_seconds % seconds_in_minute
-    if days == 1:
-        days_word = "день"
-    elif 2 <= days <= 4:
-            days_word = "дні"
-    else:
-            days_word = "днів"
-    hours_str = str(hours).zfill(2)
-    minutes_str = str(minutes).zfill(2)
-    seconds_str = str(seconds).zfill(2)
-    result = f"{days} {days_word}, {hours_str}:{minutes_str}:{seconds_str}"
+    days = input_seconds // (24 * 60 * 60)
+    hours = (input_seconds % (24 * 60 * 60)) // (60 * 60)
+    minutes = (input_seconds % (60 * 60)) // 60
+    seconds = input_seconds % 60
 
-    print(result)
+    time_str = f"{int(days)} {'день' if days == 1 else 'дні' if 2 <= days <= 4 else 'днів'}:{str(hours).zfill(2)}:{str(minutes).zfill(2)}:{str(seconds).zfill(2)}"
+
+    print(time_str)
